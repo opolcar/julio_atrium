@@ -6,6 +6,7 @@ class NaiveModel:
 
     def __init__(self):
         self.media={}
+        self.archivo_procesado='archivo_procesado.pkl'
 
     def fit(self, df:DataFrame):
         '''Cálculo media columnas'''
@@ -25,13 +26,13 @@ class NaiveModel:
                 df_copy.loc[row, column]=df_copy[column][row]/media_columna
         return df_copy
 
-    def save(self, filename:str): 
-        with open (filename, 'wb') as file:
+    def save(self): 
+        with open (self.archivo_procesado, 'wb') as file:
             pickle.dump(self.media, file)
-        print(f'Medias guardadas en {filename}')
+        print(f'Medias guardadas en {self.archivo_procesado}')
         
-    def load(self,filename:str):
-        with open(filename, 'rb') as f:
+    def load(self):
+        with open(self.archivo_procesado, 'rb') as f:
             self.media = pickle.load(f)
     
     

@@ -7,5 +7,5 @@ df=pd.read_csv(
     )
 objeto= NaiveModel()
 objeto.fit(df)
-objeto.save(filename='archivo_procesado.pkl')
+objeto.save()
 print("El archivo se ha guardado correctamente.")
