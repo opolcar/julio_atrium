@@ -1,4 +1,3 @@
-import pandas as pd
 from pandas import DataFrame
 import pickle
 
@@ -13,6 +12,7 @@ class NaiveModel:
         self.media = df.mean().to_dict()
 
     def predict(self, df: DataFrame) -> DataFrame:
+        '''División de cada dato por la media de su columna'''
         df_copy = df.copy(deep=True).astype(float)
         columns=df_copy.columns
         rows=len(df_copy)
@@ -27,11 +27,13 @@ class NaiveModel:
         return df_copy
 
     def save(self): 
+        '''Guardar pickle con las medias de predict'''
         with open (self.archivo_procesado, 'wb') as file:
             pickle.dump(self.media, file)
         print(f'Medias guardadas en {self.archivo_procesado}')
         
     def load(self):
+        '''Cargar datos del archivo pickle'''
         with open(self.archivo_procesado, 'rb') as f:
             self.media = pickle.load(f)
     
